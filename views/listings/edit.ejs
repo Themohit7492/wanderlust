@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #0f0f1a, #000);
+      color: #e0e0ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00ffe0;
+      text-shadow: 0 0 10px #00ffe0, 0 0 20px #0077ff;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      background: rgba(20, 20, 40, 0.85);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #7a00ff, 0 0 40px rgba(122, 0, 255, 0.5);
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #00ffe0;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s ease-in-out;
+      font-family: 'Orbitron', sans-serif;
+      resize: none;
+    }
+
+    input:focus, textarea:focus {
+      box-shadow: 0 0 10px #00ffe0, 0 0 20px #0077ff;
+      border-color: #0077ff;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    button {
+      background: transparent;
+      color: #00ffe0;
+      border: 2px solid #00ffe0;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #00ffe0;
+      box-shadow: 0 0 10px #00ffe0 inset, 0 0 15px #00ffe0;
+    }
+
+    button:hover {
+      background: #00ffe0;
+      color: #000;
+      box-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0;
+    }
+  </style>
+</head>
+<body>
+     <%- include("../includes/navbar.ejs")%>
+      <h3>Edit Your Hotel</h3>
+        <form method="post" action="/listings/<%=listing._id%>?_method=PUT">
+        <input name="listing[title]" value= "<%=listing.title%> " type="text">
+        <br>
+        <textarea name="listing[description]" ><%=listing.description%></textarea>
+        <br>
+        <input name="listing[price]" value="<%=listing.price%>">
+        <br>
+        <input name="listing[location]" value="<%=listing.location%>">
+        <br>
+        <input name="listing[country]" value="<%=listing.country%>">
+        <br>
+        <input name="listing[image]" value="<%=listing.image%>">
+        <br>
+        <button>edit</button>
+    </form>
+    <%- include("../includes/footer.ejs")%>
+</body>
+</html>

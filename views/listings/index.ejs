@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wanderlust</title>
+      <style>
+           .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 20px;
+  } 
+
+  .row a {
+    flex: 1 1 calc(25% - 20px); /* 4 cards per row */
+    max-width: calc(25% - 20px);
+    text-decoration: none;
+  }
+
+  .card {
+    border: none !important;
+    border-radius: 12px;
+    background: rgba(20, 20, 30, 0.9);
+    color: #fff;
+    box-shadow: 0 0 10px #7a00ff;
+    transition: 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px #7a00ff, 0 0 40px #7a00ff;
+  }
+   
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #ddddf0, #f0eaea);
+      color: #e0e0ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #eafa12;
+      text-shadow: 0 0 10px #daf5f2, 0 0 20px #e9ecf0;
+      margin-bottom: 1.5rem;
+    }
+
+    
+    button {
+      background: transparent;
+      color: #00ffe0;
+      border: 2px solid #00ffe0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #00ffe0;
+      box-shadow: 0 0 10px #00ffe0 inset, 0 0 15px #00ffe0;
+    }
+
+    button:hover {
+      background: #00ffe0;
+      color: #eee7e7;
+      box-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0;
+    }
+
+    
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 2rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    li {
+      margin: 15px 0;
+    }
+
+    a {
+      display: block;
+      padding: 12px 20px;
+      border: 2px solid #7a00ff;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.2rem;
+      background: rgba(238, 238, 250, 0.7);
+      transition: 0.3s ease-in-out;
+      box-shadow: 0 0 10px #7a00ff;
+    }
+
+    a:hover {
+      background: #7a00ff;
+      color: #fff;
+      box-shadow: 0 0 20px #7a00ff, 0 0 40px #7a00ff;
+      transform: scale(1.05);
+    }
+    .card{
+        border:none !important;
+        margin-bottom: 2rem;
+
+    }
+  </style>
+</head>
+<body>
+     <%- include("../includes/navbar.ejs")%>
+   <%- include("../includes/flash.ejs")%>
+    <h3>all Hotels</h3>
+    <form method="GET" action="/listings/new">
+        <button>Add your hotel</button>
+    </form>
+    <div class="row">
+        <% for(let listing of allListings){%>
+       <a href="/listings/<%=listing._id%> ">    
+    <div class="card" >
+  <img src="<%=listing.image.url%>" class="card-img-top" alt="listing-image" height="220rem">
+  <div class="card-body">
+    <p class="card-text"><%= listing.title %><br>
+     ₹<%= listing.price %>/night
+    </p>
+  </div>
+</div> </a>
+<%}%>
+
+    </div>
+    
+<%- include("../includes/footer.ejs")%>
+</body>
+</html>

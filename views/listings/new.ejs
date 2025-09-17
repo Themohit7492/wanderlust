@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+     <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #e9e9f5, #f1ebeb);
+      color: #e0e0ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00ffe0;
+      text-shadow: 0 0 10px #00ffe0, 0 0 20px #0077ff;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      background: rgba(248, 248, 252, 0.85);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #7a00ff, 0 0 40px rgba(122, 0, 255, 0.5);
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #00ffe0;
+      border-radius: 8px;
+      background: transparent;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s ease-in-out;
+      font-family: 'Orbitron', sans-serif;
+      resize: none;
+    }
+
+    input:focus, textarea:focus {
+      box-shadow: 0 0 10px #00ffe0, 0 0 20px #0077ff;
+      border-color: #0077ff;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+
+    button {
+      background: transparent;
+      color: #00ffe0;
+      border: 2px solid #00ffe0;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #00ffe0;
+      box-shadow: 0 0 10px #00ffe0 inset, 0 0 15px #00ffe0;
+    }
+
+    button:hover {
+      background: #00ffe0;
+      color: #f5eded;
+      box-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0;
+    }
+  </style>
+</head>
+<body>
+     <%- include("../includes/navbar.ejs")%>
+     <h3>Add your Hotel</h3>
+    <form method="post" action="/listings"  class="needs-valiation"><div>
+        <label for="title" class="form-label">Enter Title</label>
+          <input name="listing[title]"  type="text" class="form-control" required/>
+        <div class="valid-feedback">awesome title</div>
+      <div class="invalid-feedback">please enter title</div></div>
+        <br><div>
+        <label for="description" class="form-label">Enter Description</label>
+        <textarea name="listing[description]" class="form-control"required></textarea></div>
+        <br>
+        <div>
+        <label for="price" class="form-label">Enter price in rupees</label>
+        <input name="listing[price]" class="form-control"required/></div>
+        <br>
+        <div></div>
+        <label for="location" class="form-label">Enter Location</label>
+        <input name="listing[location]"class="form-control"required/></div>
+        <br>
+        <div>
+        <label for="country" class="form-label">Enter country</label>
+        <input name="listing[country]" class="form-control"required/></div>
+        <br>
+        <div>
+        <label for="image" class="form-label">Enter image url or link</label>
+        <input name="listing[image]" class="form-control"></div>
+        <br>
+        <br>
+        <button class="btn btn-dark">Add</button>
+    </form>
+    <script src="/js/sript.js"></script>
+    <%- include("../includes/footer.ejs")%>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wanderlust</title>
+    <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(circle at top, #e3e3e9, #f7f2f2);
+      color: #e0e0ff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    h3 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #00ffe0;
+      text-shadow: 0 0 10px #00ffe0, 0 0 20px #0077ff;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: rgba(220, 220, 233, 0.85);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #7a00ff, 0 0 40px rgba(122, 0, 255, 0.5);
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .card li {
+      list-style: none;
+      font-size: 1.2rem;
+      padding: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .card li:last-child {
+      border-bottom: none;
+    }
+
+    
+    a {
+      background: transparent;
+      color: #00ffe0;
+      border: 2px solid #00ffe0;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #00ffe0;
+      box-shadow: 0 0 10px #00ffe0 inset, 0 0 15px #00ffe0;
+      text-decoration: none;
+    }
+     form {
+      background: rgba(242, 242, 252, 0.85);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #7a00ff, 0 0 40px rgba(122, 0, 255, 0.5);
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+     button {
+      background: transparent;
+      color: #010808;
+      border: 2px solid #00ffe0;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px #00ffe0;
+      box-shadow: 0 0 10px #00ffe0 inset, 0 0 15px #00ffe0;
+    }
+
+    button:hover {
+      background: #00ffe0;
+      color: #00ffe0;
+      box-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0;
+    }
+
+
+    a:hover {
+      background: #00ffe0;
+      color: #00ffe0;
+      box-shadow: 0 0 20px #00ffe0, 0 0 40px #00ffe0;
+    }
+    .listing-details {
+  list-style: none;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 500px;
+  background: rgba(211, 211, 218, 0.9);
+  border: 2px solid #00ffe0;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #00ffe0, 0 0 30px rgba(0, 255, 224, 0.4);
+  font-family: 'Orbitron', sans-serif;
+  color: #00ffe0;
+}
+
+.listing-details li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 255, 224, 0.3);
+  transition: 0.3s;
+}
+
+.listing-details li:last-child {
+  border-bottom: none;
+}
+
+.listing-details li:hover {
+  background: rgba(214, 228, 226, 0.1);
+  color: #010808;
+  text-shadow: 0 0 8px #00ffe0, 0 0 15px #0077ff;
+  transform: translateX(5px);
+}
+  </style>
+</head>
+<body>
+    <%- include("../includes/navbar.ejs")%>
+    <%- include("../includes/flash.ejs")%>
+    <h3>listing detail</h3>
+     <div class="card" >
+  <img src="<%=listing.image.url%>" class="card-img-top" alt="The Hotel" height="220rem">
+  <div class="card-body">
+   <ul>
+        <li><strong>Title:</strong> <%= listing.title %></li>
+       <li><strong>Description:</strong> <%= listing.description %></li>
+  <li><strong>Price:</strong> ₹<%= listing.price %></li>
+  <li><strong>Location:</strong> <%= listing.location %></li>
+  <li><strong>Country:</strong> <%= listing.country %></li></ul>
+    </p>
+  </div>
+</div>
+  
+
+    
+    <a href="/listings/<%=listing._id%>/edit">edit this listing</a>
+    <br>
+
+   
+    <form method="post" action="/listings/<%=listing._id%>?_method=DELETE">
+        <button style="color: #010808 ;">Delete this Hotel</button>
+        </form>
+         <br>
+         <div>
+          <h4>Reviews</h4>
+          <form action="/listings/<%= listing.id%>/reviews" method="post">
+            <div><label for="rating">
+              Rating
+            </label>
+            <input type="range" min="1" max="5" name="review[rating]" class="form-range">
+          </div>
+          <div>
+            <label for="comment">comment</label>
+            <textarea name="review[comment]" id="comment" cols="30" rows="5" required></textarea>
+            <button>Submit your Review</button>
+          </div>
+          </form>
+          <hr/><div class="card">
+          <b><p>Hotel Reviews</p></b>
+          <%for(review of listing.reviews){%>
+          <a>  <div class="card">
+            
+               <h5 class="card-title">Mohit Singh</h5>
+               <p class="card-text"><%=review.comment%></p>
+              <p class="card-text">Rating-><%=review.rating%>  Star</p>
+               <form method="post" action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE"> <button class="btn btn-sm">Delete this review</button></form>
+           
+            
+          </div></a>
+          <%}%>
+           
+        </div>
+         </div>
+          <br><br><br>
+        <%- include("../includes/footer.ejs")%>
+</body>
+</html>
